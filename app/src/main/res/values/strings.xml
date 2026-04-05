@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TapIt</string>
+    <string name="tap_instruction">Tap the screen!</string>
+</resources>
