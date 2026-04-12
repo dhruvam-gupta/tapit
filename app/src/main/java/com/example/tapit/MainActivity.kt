@@ -4,6 +4,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import java.util.Locale
@@ -48,6 +49,14 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         mainLayout.setOnClickListener {
             generateAndSpeakWord()
+        }
+
+        val repeatButton = findViewById<Button>(R.id.repeatButton)
+        repeatButton.setOnClickListener {
+            val currentWord = wordTextView.text.toString()
+            if (currentWord.isNotEmpty()) {
+                textToSpeech?.speak(currentWord, TextToSpeech.QUEUE_FLUSH, null, null)
+            }
         }
     }
 
