@@ -1,6 +1,6 @@
-# TapIt
+# Tap and Learn
 
-TapIt is a simple, interactive, and kid-friendly Android application designed to help toddlers and children learn new words. 
+Tap and Learn is a simple, interactive, and kid-friendly Android application designed to help toddlers and children learn new words. 
 
 ## How it Works
 When a user opens the app and taps anywhere on the screen, the application:
