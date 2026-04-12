@@ -30,6 +30,12 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         "#E6E6FA", "#FFF0F5", "#F0FFF0", "#E0FFFF", "#FFE4E1"
     )
 
+    // Darker coordinated colors for the button
+    private val buttonColors = arrayOf(
+        "#E5A1A7", "#E5C8A7", "#E5E5A7", "#A7E5B4", "#A7CAE5",
+        "#CFCFE1", "#E5D8DC", "#D8E5D8", "#C9E5E5", "#E5CDCA"
+    )
+
     private var lastWordIndex = -1
     private var lastColorIndex = -1
 
@@ -52,6 +58,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         }
 
         val repeatButton = findViewById<Button>(R.id.repeatButton)
+        repeatButton.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor(buttonColors[initialColorIndex]))
         repeatButton.setOnClickListener {
             val currentWord = wordTextView.text.toString()
             if (currentWord.isNotEmpty()) {
@@ -80,6 +87,8 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             // Update UI
             wordTextView.text = wordToSpeak
             mainLayout.setBackgroundColor(Color.parseColor(backgroundColors[newColorIndex]))
+            val repeatButton = findViewById<Button>(R.id.repeatButton)
+            repeatButton.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor(buttonColors[newColorIndex]))
 
             // Speak the word
             tts.speak(wordToSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
