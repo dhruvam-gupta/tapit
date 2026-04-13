@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.speech.tts.TextToSpeech
 import android.view.View
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import coil.load
 import java.util.Locale
 import kotlin.random.Random
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var textToSpeech: TextToSpeech? = null
     private lateinit var wordTextView: TextView
     private lateinit var mainLayout: View
+    private lateinit var backgroundImageView: ImageView
 
     private val words = arrayOf(
         "Apple", "Banana", "Cat", "Dog", "Elephant",
@@ -45,6 +48,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
         wordTextView = findViewById(R.id.wordTextView)
         mainLayout = findViewById(R.id.main_layout)
+        backgroundImageView = findViewById(R.id.backgroundImageView)
 
         textToSpeech = TextToSpeech(this, this)
 
@@ -89,6 +93,12 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             mainLayout.setBackgroundColor(Color.parseColor(backgroundColors[newColorIndex]))
             val repeatButton = findViewById<Button>(R.id.repeatButton)
             repeatButton.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor(buttonColors[newColorIndex]))
+
+            // Attempt to load an image from assets (e.g., "apple.webp")
+            val imageFileName = "${wordToSpeak.lowercase().replace(" ", "_")}.webp"
+            backgroundImageView.load("file:///android_asset/images/$imageFileName") {
+                crossfade(true)
+            }
 
             // Speak the word
             tts.speak(wordToSpeak, TextToSpeech.QUEUE_FLUSH, null, null)
