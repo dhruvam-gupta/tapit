@@ -1,4 +1,4 @@
-package com.example.tapit
+package com.app.tapit
 
 import android.graphics.Color
 import android.os.Bundle
