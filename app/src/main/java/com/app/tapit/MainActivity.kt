@@ -39,7 +39,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         "#CFCFE1", "#E5D8DC", "#D8E5D8", "#C9E5E5", "#E5CDCA"
     )
 
-    private var lastWordIndex = -1
+    // Tracks the last N word indices shown; a word can only repeat after it leaves this queue
+    private val recentWords = ArrayDeque<Int>()
+    private val recentWordsLimit = 5
     private var lastColorIndex = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,19 +75,21 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private fun generateAndSpeakWord() {
         textToSpeech?.let { tts ->
-            // Pick a new random word different from the last one
+            // Pick a word whose index is not in the recent-words queue
             var newWordIndex: Int
             do {
                 newWordIndex = Random.nextInt(words.size)
-            } while (newWordIndex == lastWordIndex && words.size > 1)
-            lastWordIndex = newWordIndex
+            } while (recentWords.contains(newWordIndex))
+            // Add to queue and evict oldest if over the limit
+            recentWords.addLast(newWordIndex)
+            if (recentWords.size > recentWordsLimit) recentWords.removeFirst()
             val wordToSpeak = words[newWordIndex]
 
-            // Pick a new random background color different from the last one
+            // Pick a background color different from the last one
             var newColorIndex: Int
             do {
                 newColorIndex = Random.nextInt(backgroundColors.size)
-            } while (newColorIndex == lastColorIndex && backgroundColors.size > 1)
+            } while (newColorIndex == lastColorIndex)
             lastColorIndex = newColorIndex
 
             // Update UI
