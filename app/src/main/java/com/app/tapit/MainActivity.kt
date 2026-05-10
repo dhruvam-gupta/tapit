@@ -54,6 +54,11 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         wordTextView = findViewById(R.id.wordTextView)
         mainLayout = findViewById(R.id.main_layout)
         backgroundImageView = findViewById(R.id.backgroundImageView)
+        val repeatButton = findViewById<Button>(R.id.repeatButton)
+
+        // Capture original margins from XML
+        val originalTextMargin = (wordTextView.layoutParams as android.view.ViewGroup.MarginLayoutParams).topMargin
+        val originalButtonMargin = (repeatButton.layoutParams as android.view.ViewGroup.MarginLayoutParams).bottomMargin
 
         textToSpeech = TextToSpeech(this, this)
 
@@ -62,15 +67,20 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         lastColorIndex = initialColorIndex
         mainLayout.setBackgroundColor(Color.parseColor(backgroundColors[initialColorIndex]))
 
-        // Handle Edge-to-Edge insets for Android 15+
-        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
+        // Handle Edge-to-Edge insets by adding to the original XML margins
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { _, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.updatePadding(
-                left = systemBars.left,
-                top = systemBars.top,
-                right = systemBars.right,
-                bottom = systemBars.bottom
-            )
+            
+            // Apply original margin + status bar height
+            val textParams = wordTextView.layoutParams as android.view.ViewGroup.MarginLayoutParams
+            textParams.topMargin = originalTextMargin + systemBars.top
+            wordTextView.layoutParams = textParams
+
+            // Apply original margin + navigation bar height
+            val buttonParams = repeatButton.layoutParams as android.view.ViewGroup.MarginLayoutParams
+            buttonParams.bottomMargin = originalButtonMargin + systemBars.bottom
+            repeatButton.layoutParams = buttonParams
+
             insets
         }
 
