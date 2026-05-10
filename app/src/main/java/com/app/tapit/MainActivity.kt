@@ -8,6 +8,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updatePadding
 import coil.load
 import java.util.Locale
 import kotlin.random.Random
@@ -58,6 +61,18 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         val initialColorIndex = Random.nextInt(backgroundColors.size)
         lastColorIndex = initialColorIndex
         mainLayout.setBackgroundColor(Color.parseColor(backgroundColors[initialColorIndex]))
+
+        // Handle Edge-to-Edge insets for Android 15+
+        ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { v, insets ->
+            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.updatePadding(
+                left = systemBars.left,
+                top = systemBars.top,
+                right = systemBars.right,
+                bottom = systemBars.bottom
+            )
+            insets
+        }
 
         mainLayout.setOnClickListener {
             generateAndSpeakWord()
