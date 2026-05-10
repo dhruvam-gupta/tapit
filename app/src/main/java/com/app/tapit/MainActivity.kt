@@ -10,7 +10,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import coil.load
 import java.util.Locale
 import kotlin.random.Random
@@ -88,7 +87,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             generateAndSpeakWord()
         }
 
-        val repeatButton = findViewById<Button>(R.id.repeatButton)
         repeatButton.backgroundTintList = android.content.res.ColorStateList.valueOf(Color.parseColor(buttonColors[initialColorIndex]))
         repeatButton.setOnClickListener {
             val currentWord = wordTextView.text.toString()
