@@ -8,25 +8,15 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/imageCard"
+    <ImageView
+        android:id="@+id/backgroundImageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="32dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="8dp"
-        app:strokeWidth="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintBottom_toTopOf="@+id/repeatButton"
-        app:layout_constraintTop_toBottomOf="@+id/wordTextView">
-
-        <ImageView
-            android:id="@+id/backgroundImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
-
-    </com.google.android.material.card.MaterialCardView>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/wordTextView"
@@ -36,24 +26,28 @@
         android:textSize="35sp"
         android:textStyle="bold"
         android:textColor="#FFFFFF"
-        android:background="#66000000"
+        android:shadowColor="#000000"
+        android:shadowDx="2"
+        android:shadowDy="2"
+        android:shadowRadius="4"
         android:padding="16dp"
         android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="17dp" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/repeatButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Speak Again"
-        android:layout_marginBottom="27dp"
+        android:layout_marginBottom="13dp"
         android:padding="16dp"
         android:textSize="18sp"
         app:cornerRadius="24dp"
         android:textColor="#333333"
+        android:elevation="9dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

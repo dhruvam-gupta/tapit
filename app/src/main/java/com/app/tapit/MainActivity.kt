@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
     private val words = arrayOf(
         "Apple", "Banana", "Cat", "Dog", "Elephant",
-        "Frog", "Giraffe", "Horse", "Ice Cream", "Juice",
+        "Frog", "Glass", "Horse", "Ice Cream", "Juice",
         "Kangaroo", "Lion", "Monkey", "Nest", "Orange",
         "Penguin", "Queen", "Rabbit", "Sun", "Tiger",
         "Umbrella", "Violin", "Watermelon", "Xylophone",
@@ -70,9 +70,9 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
         ViewCompat.setOnApplyWindowInsetsListener(mainLayout) { _, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             
-            // Apply original margin + status bar height
+            // Apply original margin + status bar height + extra buffer for camera cutouts
             val textParams = wordTextView.layoutParams as android.view.ViewGroup.MarginLayoutParams
-            textParams.topMargin = originalTextMargin + systemBars.top
+            textParams.topMargin = originalTextMargin + systemBars.top + 20
             wordTextView.layoutParams = textParams
 
             // Apply original margin + navigation bar height
