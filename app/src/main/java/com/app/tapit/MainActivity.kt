@@ -112,9 +112,6 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
             // Update UI
             wordTextView.text = wordToSpeak
             mainLayout.setBackgroundColor(Color.parseColor(backgroundColors[newColorIndex]))
-            val repeatButton = findViewById<Button>(R.id.repeatButton)
-
-
             // Attempt to load an image from assets (e.g., "apple.webp")
             val imageFileName = "${wordToSpeak.lowercase().replace(" ", "_")}.webp"
             backgroundImageView.load("file:///android_asset/images/$imageFileName") {
