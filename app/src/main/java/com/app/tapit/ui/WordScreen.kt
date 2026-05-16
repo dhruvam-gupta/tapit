@@ -8,11 +8,15 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBars
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -31,15 +35,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.app.tapit.constants.AppConstants
 import com.app.tapit.data.Category
 import java.util.Locale
 import kotlin.random.Random
@@ -57,6 +60,9 @@ fun WordScreen(
     onBackClick: () -> Unit
 ) {
     val context = LocalContext.current
+    val dims = AppConstants.WordScreen
+    val textSize = AppConstants.TextSize
+    val anim = AppConstants.Animation
 
     // TextToSpeech setup
     var ttsReady by remember { mutableStateOf(false) }
@@ -86,7 +92,6 @@ fun WordScreen(
     var currentImagePath by remember { mutableStateOf("") }
     var currentColorIndex by remember { mutableIntStateOf(Random.nextInt(backgroundColors.size)) }
     val recentWords = remember { ArrayDeque<Int>() }
-    val recentWordsLimit = 5
     var lastColorIndex by remember { mutableIntStateOf(-1) }
     var hasStarted by remember { mutableStateOf(false) }
 
@@ -101,7 +106,7 @@ fun WordScreen(
         } while (recentWords.contains(newWordIndex) && recentWords.size < words.size)
 
         recentWords.addLast(newWordIndex)
-        if (recentWords.size > recentWordsLimit) recentWords.removeFirst()
+        if (recentWords.size > anim.RECENT_WORDS_LIMIT) recentWords.removeFirst()
 
         // Pick a different background color
         var newColorIndex: Int
@@ -144,46 +149,73 @@ fun WordScreen(
             )
         }
 
-        // Back button (top-left)
+        // Back button (top-left) — white arrow with drop shadow, no background
+        val statusBarPadding = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
         IconButton(
             onClick = onBackClick,
             modifier = Modifier
                 .align(Alignment.TopStart)
-                .padding(start = 12.dp, top = 44.dp)
-                .size(44.dp)
-                .clip(CircleShape),
+                .padding(
+                    start = dims.BACK_BUTTON_START_PADDING,
+                    top = statusBarPadding + dims.BACK_BUTTON_TOP_EXTRA_PADDING
+                )
+                .size(dims.BACK_BUTTON_SIZE),
             colors = IconButtonDefaults.iconButtonColors(
-                containerColor = Color.White.copy(alpha = 0.7f)
+                containerColor = Color.Transparent
             )
         ) {
-            Icon(
-                imageVector = Icons.Default.ArrowBack,
-                contentDescription = "Back",
-                tint = Color(0xFF1E293B)
-            )
+            Box {
+                // Shadow layer — dark icon offset behind the main icon
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = null,
+                    tint = Color.Black.copy(alpha = dims.BACK_SHADOW_ALPHA),
+                    modifier = Modifier
+                        .size(dims.BACK_ICON_SIZE)
+                        .offset(
+                            x = dims.BACK_SHADOW_OFFSET,
+                            y = dims.BACK_SHADOW_OFFSET
+                        )
+                )
+                // Main white icon
+                Icon(
+                    imageVector = Icons.Default.ArrowBack,
+                    contentDescription = "Back",
+                    tint = Color.White,
+                    modifier = Modifier.size(dims.BACK_ICON_SIZE)
+                )
+            }
         }
 
         // Word text (top center)
         Text(
             text = if (hasStarted) currentWord else "Tap the screen!",
-            fontSize = 35.sp,
+            fontSize = textSize.WORD_DISPLAY,
             fontWeight = FontWeight.Bold,
             color = Color.White,
             textAlign = TextAlign.Center,
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(top = 48.dp, start = 64.dp, end = 64.dp)
+                .padding(
+                    top = statusBarPadding + dims.WORD_TEXT_TOP_EXTRA_PADDING,
+                    start = dims.WORD_TEXT_HORIZONTAL_PADDING,
+                    end = dims.WORD_TEXT_HORIZONTAL_PADDING
+                )
                 .fillMaxWidth(),
             style = androidx.compose.ui.text.TextStyle(
                 shadow = androidx.compose.ui.graphics.Shadow(
                     color = Color.Black,
-                    offset = androidx.compose.ui.geometry.Offset(2f, 2f),
-                    blurRadius = 4f
+                    offset = androidx.compose.ui.geometry.Offset(
+                        dims.WORD_SHADOW_OFFSET,
+                        dims.WORD_SHADOW_OFFSET
+                    ),
+                    blurRadius = dims.WORD_SHADOW_BLUR
                 )
             )
         )
 
-        // "Speak Again" button (bottom center)
+        // "Speak Again" button (bottom center) — respects navigation bar insets
+        val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
         Button(
             onClick = {
                 if (currentWord.isNotEmpty()) {
@@ -192,20 +224,23 @@ fun WordScreen(
             },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 40.dp),
-            shape = RoundedCornerShape(28.dp),
+                .padding(bottom = navBarPadding + dims.SPEAK_BUTTON_BOTTOM_EXTRA_PADDING),
+            shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White.copy(alpha = 0.45f)
+                containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
             ),
-            elevation = ButtonDefaults.buttonElevation(defaultElevation = 3.dp)
+            elevation = ButtonDefaults.buttonElevation(defaultElevation = dims.SPEAK_BUTTON_ELEVATION)
         ) {
             Text(
                 text = "Speak Again",
-                fontSize = 18.sp,
+                fontSize = textSize.SPEAK_BUTTON,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF1A1A1A),
-                modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp),
-                letterSpacing = 0.5.sp
+                modifier = Modifier.padding(
+                    horizontal = dims.SPEAK_BUTTON_CONTENT_HORIZONTAL_PADDING,
+                    vertical = dims.SPEAK_BUTTON_CONTENT_VERTICAL_PADDING
+                ),
+                letterSpacing = textSize.SPEAK_BUTTON_LETTER_SPACING
             )
         }
     }

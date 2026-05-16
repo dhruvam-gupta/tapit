@@ -38,8 +38,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.app.tapit.constants.AppConstants
 import com.app.tapit.data.Category
 import com.app.tapit.data.CategoryData
 
@@ -63,6 +63,9 @@ private val cardColors = listOf(
 fun CategoryScreen(
     onCategoryClick: (Category) -> Unit
 ) {
+    val grid = AppConstants.CategoryGrid
+    val textSize = AppConstants.TextSize
+
     Scaffold(
         containerColor = Color(0xFFF8FAFC),
         topBar = {
@@ -70,7 +73,7 @@ fun CategoryScreen(
                 title = {
                     Text(
                         text = "Tap and Learn",
-                        fontSize = 24.sp,
+                        fontSize = textSize.APP_TITLE,
                         fontWeight = FontWeight.ExtraBold,
                         color = Color(0xFF1E293B)
                     )
@@ -82,13 +85,16 @@ fun CategoryScreen(
         }
     ) { paddingValues ->
         LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
+            columns = GridCells.Fixed(grid.COLUMN_COUNT),
             modifier = Modifier
                 .fillMaxSize()
                 .padding(paddingValues),
-            contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
-            horizontalArrangement = Arrangement.spacedBy(14.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+            contentPadding = PaddingValues(
+                horizontal = grid.HORIZONTAL_PADDING,
+                vertical = grid.VERTICAL_PADDING
+            ),
+            horizontalArrangement = Arrangement.spacedBy(grid.CELL_SPACING),
+            verticalArrangement = Arrangement.spacedBy(grid.CELL_SPACING)
         ) {
             items(CategoryData.categories) { category ->
                 val colorIndex = CategoryData.categories.indexOf(category) % cardColors.size
@@ -108,79 +114,84 @@ private fun CategoryCard(
     cardColor: Color,
     onClick: () -> Unit
 ) {
+    val grid = AppConstants.CategoryGrid
+    val textSize = AppConstants.TextSize
+    val anim = AppConstants.Animation
+
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val scale by animateFloatAsState(
-        targetValue = if (isPressed) 0.94f else 1f,
-        animationSpec = tween(durationMillis = 100),
+        targetValue = if (isPressed) anim.CARD_PRESS_SCALE else 1f,
+        animationSpec = tween(durationMillis = anim.CARD_PRESS_DURATION_MS),
         label = "card_scale"
     )
 
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .aspectRatio(0.85f)
+            .aspectRatio(grid.CARD_ASPECT_RATIO)
             .scale(scale)
             .shadow(
-                elevation = 8.dp,
-                shape = RoundedCornerShape(20.dp),
-                ambientColor = cardColor.copy(alpha = 0.4f),
-                spotColor = cardColor.copy(alpha = 0.4f)
+                elevation = grid.CARD_ELEVATION,
+                shape = RoundedCornerShape(grid.CARD_CORNER_RADIUS),
+                ambientColor = cardColor.copy(alpha = grid.CARD_SHADOW_ALPHA),
+                spotColor = cardColor.copy(alpha = grid.CARD_SHADOW_ALPHA)
             )
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
                 onClick = onClick
             ),
-        shape = RoundedCornerShape(20.dp),
+        shape = RoundedCornerShape(grid.CARD_CORNER_RADIUS),
         colors = CardDefaults.cardColors(containerColor = cardColor),
         elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(12.dp),
+                .padding(grid.CARD_INNER_PADDING),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
             // Category thumbnail image
             Box(
                 modifier = Modifier
-                    .size(90.dp)
-                    .clip(RoundedCornerShape(16.dp)),
+                    .size(grid.THUMBNAIL_SIZE)
+                    .clip(RoundedCornerShape(grid.THUMBNAIL_CORNER_RADIUS)),
                 contentAlignment = Alignment.Center
             ) {
+                // Bottom layer: emoji fallback (always rendered, visible when image fails)
+                Text(
+                    text = category.emoji,
+                    fontSize = textSize.CATEGORY_EMOJI
+                )
+                // Top layer: actual image (covers emoji when loaded successfully)
                 AsyncImage(
                     model = category.thumbnailPath,
                     contentDescription = category.name,
                     modifier = Modifier.fillMaxSize(),
                     contentScale = ContentScale.Crop
                 )
-                // Fallback emoji if image not loaded
-                Text(
-                    text = category.emoji,
-                    fontSize = 48.sp
-                )
             }
 
             // Category name
             Text(
                 text = category.name,
-                fontSize = 17.sp,
+                fontSize = textSize.CATEGORY_NAME,
                 fontWeight = FontWeight.Bold,
                 color = Color(0xFF1E293B),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = 12.dp)
+                modifier = Modifier.padding(top = grid.CATEGORY_NAME_TOP_PADDING)
             )
 
             // Item count badge
             Text(
                 text = "${category.words.size} items",
-                fontSize = 12.sp,
+                fontSize = textSize.ITEM_COUNT,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFF64748B),
                 textAlign = TextAlign.Center,
-                modifier = Modifier.padding(top = 4.dp)
+                modifier = Modifier.padding(top = grid.ITEM_COUNT_TOP_PADDING)
             )
         }
     }
