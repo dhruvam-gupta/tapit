@@ -13,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import coil.load
 import java.util.Locale
 import kotlin.random.Random
+import androidx.activity.enableEdgeToEdge
 
 class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
 
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
     private var lastColorIndex = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 

@@ -1,0 +1,23 @@
+# Git
+.git
+.gitignore
+
+# Gradle caches (will be re-downloaded inside container)
+.gradle
+build
+app/build
+
+# IDE files
+.idea
+.vscode
+*.iml
+
+# macOS
+.DS_Store
+
+# Local signing keys (never send to Docker context)
+*.jks
+*.keystore
+
+# Scripts not needed for build
+icon_gen.py
