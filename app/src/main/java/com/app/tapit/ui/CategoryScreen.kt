@@ -153,24 +153,16 @@ private fun CategoryCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Category thumbnail image
+            // Category thumbnail (Emoji Only)
             Box(
                 modifier = Modifier
                     .size(grid.THUMBNAIL_SIZE)
                     .clip(RoundedCornerShape(grid.THUMBNAIL_CORNER_RADIUS)),
                 contentAlignment = Alignment.Center
             ) {
-                // Bottom layer: emoji fallback (always rendered, visible when image fails)
                 Text(
                     text = category.emoji,
                     fontSize = textSize.CATEGORY_EMOJI
-                )
-                // Top layer: actual image (covers emoji when loaded successfully)
-                AsyncImage(
-                    model = category.thumbnailPath,
-                    contentDescription = category.name,
-                    modifier = Modifier.fillMaxSize(),
-                    contentScale = ContentScale.Crop
                 )
             }
 

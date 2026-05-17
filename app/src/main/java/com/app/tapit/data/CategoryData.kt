@@ -6,9 +6,6 @@ data class Category(
     val emoji: String,
     val words: List<String>
 ) {
-    val thumbnailPath: String
-        get() = "file:///android_asset/images/categories/${key}.webp"
-
     fun imagePathForWord(word: String): String {
         val fileName = word.lowercase().replace(" ", "_")
         return "file:///android_asset/images/${key}/${fileName}.webp"
@@ -16,6 +13,9 @@ data class Category(
 }
 
 object CategoryData {
+
+    // Categories in this set will be shown sequentially (1, 2, 3...) instead of randomly.
+    val sequentialCategories = setOf("numbers")
 
     val categories = listOf(
         Category(
@@ -36,12 +36,12 @@ object CategoryData {
             key = "vegetables",
             emoji = "🥦",
             words = listOf(
-                "Asparagus", "Broccoli", "Carrot", "Daikon", "Eggplant",
-                "Fennel", "Garlic", "Horseradish", "Iceberg Lettuce", "Jalapeno",
-                "Kale", "Leek", "Mushroom", "Napa Cabbage", "Onion",
-                "Potato", "Quinoa", "Radish", "Spinach", "Tomato",
-                "Ube", "Vidalia Onion", "Watercress", "Xigua",
-                "Yam", "Zinger"
+                "Artichoke", "Asparagus", "Beetroot", "Bell Pepper", "Broccoli",
+                "Cabbage", "Carrot", "Cauliflower", "Celery", "Corn",
+                "Cucumber", "Eggplant", "Garlic", "Ginger", "Green Bean",
+                "Kale", "Lettuce", "Mushroom", "Onion", "Pea",
+                "Potato", "Pumpkin", "Radish", "Spinach", "Sweet Potato",
+                "Tomato"
             )
         ),
         Category(
@@ -114,12 +114,12 @@ object CategoryData {
             key = "body_parts",
             emoji = "🦵",
             words = listOf(
-                "Ankle", "Belly", "Cheek", "Dimple", "Ear",
-                "Finger", "Gum", "Hair", "Eye", "Jaw",
-                "Knee", "Leg", "Mouth", "Nose", "Oval Face",
-                "Palm", "Chin", "Rib", "Shoulder", "Thumb",
-                "Upper Arm", "Vein", "Wrist", "Elbow",
-                "Yawn", "Zygomatic"
+                "Head", "Hair", "Face", "Eye", "Ear",
+                "Nose", "Mouth", "Teeth", "Tongue", "Neck",
+                "Shoulder", "Arm", "Elbow", "Hand", "Palm",
+                "Fingers", "Nails", "Chest", "Stomach", "Back",
+                "Leg", "Thigh", "Knee", "Foot", "Heel",
+                "Toes"
             )
         ),
         Category(
@@ -153,12 +153,9 @@ object CategoryData {
             key = "numbers",
             emoji = "🔢",
             words = listOf(
-                "One", "Two", "Three", "Four", "Five",
-                "Six", "Seven", "Eight", "Nine", "Ten",
-                "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen",
-                "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-                "Twenty One", "Twenty Two", "Twenty Three", "Twenty Four",
-                "Twenty Five", "Twenty Six"
+                "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+                "Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four", "Twenty-five", "Twenty-six"
             )
         )
     )

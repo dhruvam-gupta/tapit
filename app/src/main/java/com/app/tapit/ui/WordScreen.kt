@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.app.tapit.constants.AppConstants
 import com.app.tapit.data.Category
+import com.app.tapit.data.CategoryData
 import java.util.Locale
 import kotlin.random.Random
 
@@ -94,19 +95,29 @@ fun WordScreen(
     val recentWords = remember { ArrayDeque<Int>() }
     var lastColorIndex by remember { mutableIntStateOf(-1) }
     var hasStarted by remember { mutableStateOf(false) }
+    var sequentialIndex by remember { mutableIntStateOf(0) }
 
     fun generateAndSpeakWord() {
         if (!ttsReady) return
 
         val words = category.words
-        // Pick a word not in recent queue
-        var newWordIndex: Int
-        do {
-            newWordIndex = Random.nextInt(words.size)
-        } while (recentWords.contains(newWordIndex) && recentWords.size < words.size)
+        val isSequential = CategoryData.sequentialCategories.contains(category.key)
 
-        recentWords.addLast(newWordIndex)
-        if (recentWords.size > anim.RECENT_WORDS_LIMIT) recentWords.removeFirst()
+        val newWordIndex: Int
+        if (isSequential) {
+            newWordIndex = sequentialIndex
+            sequentialIndex = (sequentialIndex + 1) % words.size
+        } else {
+            // Pick a word not in recent queue
+            var randomWordIndex: Int
+            do {
+                randomWordIndex = Random.nextInt(words.size)
+            } while (recentWords.contains(randomWordIndex) && recentWords.size < words.size)
+
+            recentWords.addLast(randomWordIndex)
+            if (recentWords.size > anim.RECENT_WORDS_LIMIT) recentWords.removeFirst()
+            newWordIndex = randomWordIndex
+        }
 
         // Pick a different background color
         var newColorIndex: Int
