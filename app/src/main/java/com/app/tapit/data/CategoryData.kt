@@ -26,7 +26,7 @@ object CategoryData {
                 "Apple", "Banana", "Cherry", "Dragonfruit", "Elderberry",
                 "Fig", "Grape", "Honeydew", "Indian Gooseberry", "Jackfruit",
                 "Kiwi", "Lemon", "Mango", "Nectarine", "Orange",
-                "Papaya", "Quince", "Raspberry", "Strawberry", "Tangerine",
+                "Papaya", "Pomegranate", "Quince", "Raspberry", "Strawberry", "Tangerine",
                 "Ugli Fruit", "Vanilla Bean", "Watermelon", "Ximenia",
                 "Yellow Passion Fruit", "Zucchini"
             )
@@ -141,7 +141,7 @@ object CategoryData {
             emoji = "🏠",
             words = listOf(
                 "Alarm Clock", "Book", "Chair", "Door", "Envelope",
-                "Fork", "Globe", "Hammer", "Iron", "Jar",
+                "Fork", "Globe", "Hammer", "Iron", "Ice Cream", "Jar", "Juice",
                 "Key", "Lamp", "Mirror", "Notebook", "Oven",
                 "Pillow", "Quill", "Ruler", "Scissors", "Table",
                 "Umbrella", "Vase", "Watch", "Xylophone",
