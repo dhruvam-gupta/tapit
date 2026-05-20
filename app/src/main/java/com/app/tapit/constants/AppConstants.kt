@@ -53,6 +53,8 @@ object AppConstants {
         val APP_TITLE = 24.sp
         val CATEGORY_NAME = 17.sp
         val CATEGORY_EMOJI = 48.sp
+        val CATEGORY_EMOJI_MULTILINE = 34.sp
+        val CATEGORY_EMOJI_LINE_HEIGHT = 38.sp
         val ITEM_COUNT = 12.sp
         val WORD_DISPLAY = 35.sp
         val SPEAK_BUTTON = 18.sp

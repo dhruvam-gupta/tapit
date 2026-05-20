@@ -37,6 +37,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.app.tapit.constants.AppConstants
@@ -160,9 +161,12 @@ private fun CategoryCard(
                     .clip(RoundedCornerShape(grid.THUMBNAIL_CORNER_RADIUS)),
                 contentAlignment = Alignment.Center
             ) {
+                val isMultiLine = category.emoji.contains("\n")
                 Text(
                     text = category.emoji,
-                    fontSize = textSize.CATEGORY_EMOJI
+                    fontSize = if (isMultiLine) textSize.CATEGORY_EMOJI_MULTILINE else textSize.CATEGORY_EMOJI,
+                    lineHeight = if (isMultiLine) textSize.CATEGORY_EMOJI_LINE_HEIGHT else TextUnit.Unspecified,
+                    textAlign = TextAlign.Center
                 )
             }
 

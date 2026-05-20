@@ -27,7 +27,7 @@ object CategoryData {
                 "Fig", "Grape", "Honeydew", "Indian Gooseberry", "Jackfruit",
                 "Kiwi", "Lemon", "Mango", "Nectarine", "Orange",
                 "Papaya", "Pomegranate", "Quince", "Raspberry", "Strawberry", "Tangerine",
-                "Ugli Fruit", "Vanilla Bean", "Watermelon", "Ximenia",
+                "Ugli Fruit", "Vanilla Bean", "Watermelon", "Ximenia or Wild Plum",
                 "Yellow Passion Fruit", "Zucchini"
             )
         ),
@@ -151,7 +151,7 @@ object CategoryData {
         Category(
             name = "Numbers",
             key = "numbers",
-            emoji = "🔢",
+            emoji = "❶❷\n❸❹",
             words = listOf(
                 "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
                 "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
