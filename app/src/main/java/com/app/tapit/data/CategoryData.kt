@@ -50,10 +50,10 @@ object CategoryData {
             emoji = "🐾",
             words = listOf(
                 "Alligator", "Bear", "Cat", "Dog", "Elephant",
-                "Fox", "Giraffe", "Horse", "Iguana", "Jaguar",
+                "Fox", "Frog", "Giraffe", "Horse", "Iguana", "Jaguar",
                 "Kangaroo", "Lion", "Monkey", "Newt", "Octopus",
                 "Panda", "Quail", "Rabbit", "Snake", "Tiger",
-                "Unicorn", "Vulture", "Wolf", "X-Ray Fish",
+                "Unicorn", "Vampire Bat", "Wolf", "X-Ray Fish",
                 "Yak", "Zebra"
             )
         ),
