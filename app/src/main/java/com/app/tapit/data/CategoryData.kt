@@ -15,10 +15,10 @@ data class Category(
 object CategoryData {
 
     // Categories in this set will be shown sequentially (1, 2, 3...) instead of randomly.
-    val sequentialCategories = setOf("numbers")
+    val sequentialCategories = setOf("numbers", "colors")
 
     val categories = listOf(
-        Category(
+        Category( // done
             name = "Fruits",
             key = "fruits",
             emoji = "🍎",
@@ -44,7 +44,7 @@ object CategoryData {
                 "Tomato"
             )
         ),
-        Category(
+        Category( //done
             name = "Animals",
             key = "animals",
             emoji = "🐾",
@@ -52,7 +52,7 @@ object CategoryData {
                 "Alligator", "Bear", "Cat", "Dog", "Elephant",
                 "Fox", "Frog", "Giraffe", "Horse", "Iguana", "Jaguar",
                 "Kangaroo", "Lion", "Monkey", "Newt", "Octopus",
-                "Panda", "Quail", "Rabbit", "Snake", "Tiger",
+                "Panda", "Quoll", "Rabbit", "Snake", "Tiger",
                 "Unicorn", "Vampire Bat", "Wolf", "X-Ray Fish",
                 "Yak", "Zebra"
             )
@@ -65,7 +65,7 @@ object CategoryData {
                 "Albatross", "Bluebird", "Crow", "Dove", "Eagle",
                 "Flamingo", "Goldfinch", "Hummingbird", "Ibis", "Jay",
                 "Kingfisher", "Lark", "Magpie", "Nightingale", "Owl",
-                "Parrot", "Quetzal", "Robin", "Sparrow", "Toucan",
+                "Parrot", "Quail", "Quetzal", "Robin", "Sparrow", "Toucan",
                 "Umbrellabird", "Vulture", "Woodpecker", "Xenops",
                 "Yellow Warbler", "Zebra Finch"
             )
