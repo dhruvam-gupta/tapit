@@ -48,6 +48,14 @@ object AppConstants {
         val SPEAK_BUTTON_ALPHA = 0.45f
     }
 
+    // ── Color Screen Layout ─────────────────────────────────
+    object ColorScreen {
+        val CARD_SIZE = 240.dp
+        val CARD_CORNER_RADIUS = 16.dp
+        val CARD_BORDER_WIDTH = 2.dp
+        val COLOR_NAME_TOP_PADDING = 24.dp
+    }
+
     // ── Text Sizes ───────────────────────────────────────────
     object TextSize {
         val APP_TITLE = 24.sp

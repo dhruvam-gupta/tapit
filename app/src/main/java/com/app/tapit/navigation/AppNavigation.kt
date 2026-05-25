@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.app.tapit.data.CategoryData
 import com.app.tapit.ui.CategoryScreen
+import com.app.tapit.ui.ColorScreen
 import com.app.tapit.ui.WordScreen
 
 object Routes {
@@ -32,7 +33,7 @@ fun AppNavigation(navController: NavHostController) {
             )
         }
 
-        // Screen 2: Word learning screen
+        // Screen 2: Word / Color learning screen
         composable(
             route = Routes.WORDS,
             arguments = listOf(
@@ -42,10 +43,17 @@ fun AppNavigation(navController: NavHostController) {
             val categoryKey = backStackEntry.arguments?.getString("categoryKey") ?: return@composable
             val category = CategoryData.getCategoryByKey(categoryKey) ?: return@composable
 
-            WordScreen(
-                category = category,
-                onBackClick = { navController.popBackStack() }
-            )
+            if (category.key == "colors") {
+                ColorScreen(
+                    category = category,
+                    onBackClick = { navController.popBackStack() }
+                )
+            } else {
+                WordScreen(
+                    category = category,
+                    onBackClick = { navController.popBackStack() }
+                )
+            }
         }
     }
 }
