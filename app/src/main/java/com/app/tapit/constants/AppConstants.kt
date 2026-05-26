@@ -39,6 +39,7 @@ object AppConstants {
         val WORD_TEXT_HORIZONTAL_PADDING = 64.dp
         val WORD_SHADOW_OFFSET = 2f
         val WORD_SHADOW_BLUR = 4f
+        val WORD_TEXT_HEIGHT_ESTIMATE = 56.dp
 
         val SPEAK_BUTTON_BOTTOM_EXTRA_PADDING = 16.dp
         val SPEAK_BUTTON_CORNER_RADIUS = 28.dp
@@ -67,6 +68,20 @@ object AppConstants {
         val WORD_DISPLAY = 35.sp
         val SPEAK_BUTTON = 18.sp
         val SPEAK_BUTTON_LETTER_SPACING = 0.5.sp
+    }
+
+    // ── Spelling Row ────────────────────────────────────────
+    object Spelling {
+        val BADGE_SIZE = 44.dp
+        val BADGE_CORNER_RADIUS = 12.dp
+        val LETTER_SPACING = 6.dp
+        val LETTER_FONT_SIZE = 20.sp
+        val ROW_HORIZONTAL_PADDING = 24.dp
+        val ROW_TOP_PADDING = 16.dp
+        val ACTIVE_SCALE = 1.3f
+        val SPELL_BUTTON_HORIZONTAL_PADDING = 12.dp
+        val SPELL_BUTTON_VERTICAL_PADDING = 6.dp
+        val BUTTON_GAP = 12.dp
     }
 
     // ── Animations ───────────────────────────────────────────

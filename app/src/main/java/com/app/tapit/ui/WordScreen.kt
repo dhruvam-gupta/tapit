@@ -7,7 +7,9 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -32,6 +34,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,6 +48,8 @@ import coil.compose.AsyncImage
 import com.app.tapit.constants.AppConstants
 import com.app.tapit.data.Category
 import com.app.tapit.data.CategoryData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import java.util.Locale
 import kotlin.random.Random
 
@@ -97,6 +102,12 @@ fun WordScreen(
     var hasStarted by remember { mutableStateOf(false) }
     var sequentialIndex by remember { mutableIntStateOf(0) }
 
+    // Spelling state
+    var isSpelling by remember { mutableStateOf(false) }
+    var spellingDone by remember { mutableStateOf(false) }
+    var activeLetterIndex by remember { mutableIntStateOf(-1) }
+    val coroutineScope = rememberCoroutineScope()
+
     fun generateAndSpeakWord() {
         if (!ttsReady) return
 
@@ -131,6 +142,11 @@ fun WordScreen(
         currentImagePath = category.imagePathForWord(word)
         currentColorIndex = newColorIndex
         hasStarted = true
+
+        // Reset spelling state for the new word
+        isSpelling = false
+        spellingDone = false
+        activeLetterIndex = -1
 
         tts?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
@@ -225,34 +241,103 @@ fun WordScreen(
             )
         )
 
-        // "Speak Again" button (bottom center) — respects navigation bar insets
+        // Spelling row — shown below the word text when spelling is active or done
+        if (hasStarted && (isSpelling || spellingDone)) {
+            val spelling = AppConstants.Spelling
+            Box(
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(
+                        top = statusBarPadding + dims.WORD_TEXT_TOP_EXTRA_PADDING + dims.WORD_TEXT_HEIGHT_ESTIMATE + spelling.ROW_TOP_PADDING
+                    )
+                    .fillMaxWidth(),
+                contentAlignment = Alignment.Center
+            ) {
+                SpellingRow(
+                    letters = SpellingHelper.getLetters(currentWord),
+                    activeLetterIndex = activeLetterIndex,
+                    isSpellingDone = spellingDone,
+                    isDarkBackground = true
+                )
+            }
+        }
+
+        // Bottom buttons row — respects navigation bar insets
         val navBarPadding = WindowInsets.navigationBars.asPaddingValues().calculateBottomPadding()
-        Button(
-            onClick = {
-                if (currentWord.isNotEmpty()) {
-                    tts?.speak(currentWord, TextToSpeech.QUEUE_FLUSH, null, null)
-                }
-            },
+        Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .padding(bottom = navBarPadding + dims.SPEAK_BUTTON_BOTTOM_EXTRA_PADDING),
-            shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
-            ),
-            elevation = ButtonDefaults.buttonElevation(defaultElevation = dims.SPEAK_BUTTON_ELEVATION)
+            horizontalArrangement = Arrangement.spacedBy(AppConstants.Spelling.BUTTON_GAP)
         ) {
-            Text(
-                text = "Speak Again",
-                fontSize = textSize.SPEAK_BUTTON,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF1A1A1A),
-                modifier = Modifier.padding(
-                    horizontal = dims.SPEAK_BUTTON_CONTENT_HORIZONTAL_PADDING,
-                    vertical = dims.SPEAK_BUTTON_CONTENT_VERTICAL_PADDING
+            // "Speak Again" button
+            Button(
+                onClick = {
+                    if (currentWord.isNotEmpty()) {
+                        tts?.speak(currentWord, TextToSpeech.QUEUE_FLUSH, null, null)
+                    }
+                },
+                shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
                 ),
-                letterSpacing = textSize.SPEAK_BUTTON_LETTER_SPACING
-            )
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = dims.SPEAK_BUTTON_ELEVATION)
+            ) {
+                Text(
+                    text = "Speak Again",
+                    fontSize = textSize.SPEAK_BUTTON,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF1A1A1A),
+                    modifier = Modifier.padding(
+                        horizontal = dims.SPEAK_BUTTON_CONTENT_HORIZONTAL_PADDING,
+                        vertical = dims.SPEAK_BUTTON_CONTENT_VERTICAL_PADDING
+                    ),
+                    letterSpacing = textSize.SPEAK_BUTTON_LETTER_SPACING
+                )
+            }
+
+            // "Spell It" button
+            Button(
+                onClick = {
+                    if (currentWord.isNotEmpty() && tts != null) {
+                        isSpelling = true
+                        spellingDone = false
+                        activeLetterIndex = -1
+                        SpellingHelper.spellWord(
+                            tts = tts,
+                            word = currentWord,
+                            onLetterStart = { index ->
+                                coroutineScope.launch(Dispatchers.Main) {
+                                    activeLetterIndex = index
+                                }
+                            },
+                            onSpellingComplete = {
+                                coroutineScope.launch(Dispatchers.Main) {
+                                    isSpelling = false
+                                    spellingDone = true
+                                }
+                            }
+                        )
+                    }
+                },
+                shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
+                ),
+                elevation = ButtonDefaults.buttonElevation(defaultElevation = dims.SPEAK_BUTTON_ELEVATION)
+            ) {
+                Text(
+                    text = "Spell It",
+                    fontSize = textSize.SPEAK_BUTTON,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF1A1A1A),
+                    modifier = Modifier.padding(
+                        horizontal = AppConstants.Spelling.SPELL_BUTTON_HORIZONTAL_PADDING,
+                        vertical = AppConstants.Spelling.SPELL_BUTTON_VERTICAL_PADDING
+                    ),
+                    letterSpacing = textSize.SPEAK_BUTTON_LETTER_SPACING
+                )
+            }
         }
     }
 }
