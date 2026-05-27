@@ -9,16 +9,21 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -148,7 +153,7 @@ fun WordScreen(
         spellingDone = false
         activeLetterIndex = -1
 
-        tts?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
+        tts?.speak(getSpokenText(word), TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
     Box(
@@ -215,12 +220,8 @@ fun WordScreen(
         }
 
         // Word text (top center)
-        Text(
-            text = if (hasStarted) currentWord else "Tap the screen!",
-            fontSize = textSize.WORD_DISPLAY,
-            fontWeight = FontWeight.Bold,
-            color = Color.White,
-            textAlign = TextAlign.Center,
+        // Word text and Spelling row (top center)
+        Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
                 .padding(
@@ -229,30 +230,30 @@ fun WordScreen(
                     end = dims.WORD_TEXT_HORIZONTAL_PADDING
                 )
                 .fillMaxWidth(),
-            style = androidx.compose.ui.text.TextStyle(
-                shadow = androidx.compose.ui.graphics.Shadow(
-                    color = Color.Black,
-                    offset = androidx.compose.ui.geometry.Offset(
-                        dims.WORD_SHADOW_OFFSET,
-                        dims.WORD_SHADOW_OFFSET
-                    ),
-                    blurRadius = dims.WORD_SHADOW_BLUR
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = if (hasStarted) currentWord else "Tap the screen!",
+                fontSize = textSize.WORD_DISPLAY,
+                fontWeight = FontWeight.Bold,
+                color = Color.White,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth(),
+                style = androidx.compose.ui.text.TextStyle(
+                    shadow = androidx.compose.ui.graphics.Shadow(
+                        color = Color.Black,
+                        offset = androidx.compose.ui.geometry.Offset(
+                            dims.WORD_SHADOW_OFFSET,
+                            dims.WORD_SHADOW_OFFSET
+                        ),
+                        blurRadius = dims.WORD_SHADOW_BLUR
+                    )
                 )
             )
-        )
 
-        // Spelling row — shown below the word text when spelling is active or done
-        if (hasStarted && (isSpelling || spellingDone)) {
-            val spelling = AppConstants.Spelling
-            Box(
-                modifier = Modifier
-                    .align(Alignment.TopCenter)
-                    .padding(
-                        top = statusBarPadding + dims.WORD_TEXT_TOP_EXTRA_PADDING + dims.WORD_TEXT_HEIGHT_ESTIMATE + spelling.ROW_TOP_PADDING
-                    )
-                    .fillMaxWidth(),
-                contentAlignment = Alignment.Center
-            ) {
+            // Spelling row — shown below the word text when spelling is active or done
+            if (hasStarted && (isSpelling || spellingDone)) {
+                Spacer(modifier = Modifier.height(8.dp))
                 SpellingRow(
                     letters = SpellingHelper.getLetters(currentWord),
                     activeLetterIndex = activeLetterIndex,
@@ -274,9 +275,10 @@ fun WordScreen(
             Button(
                 onClick = {
                     if (currentWord.isNotEmpty()) {
-                        tts?.speak(currentWord, TextToSpeech.QUEUE_FLUSH, null, null)
+                        tts?.speak(getSpokenText(currentWord), TextToSpeech.QUEUE_FLUSH, null, null)
                     }
                 },
+                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
@@ -320,6 +322,7 @@ fun WordScreen(
                         )
                     }
                 },
+                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
@@ -340,4 +343,8 @@ fun WordScreen(
             }
         }
     }
+}
+
+private fun getSpokenText(word: String): String {
+    return word.replace("Ximenia", "Zymenia", ignoreCase = true)
 }

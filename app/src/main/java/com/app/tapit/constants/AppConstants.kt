@@ -47,6 +47,7 @@ object AppConstants {
         val SPEAK_BUTTON_CONTENT_HORIZONTAL_PADDING = 16.dp
         val SPEAK_BUTTON_CONTENT_VERTICAL_PADDING = 8.dp
         val SPEAK_BUTTON_ALPHA = 0.45f
+        val SPEAK_BUTTON_WIDTH = 160.dp
     }
 
     // ── Color Screen Layout ─────────────────────────────────

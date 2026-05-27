@@ -70,7 +70,7 @@ object CategoryData {
                 "Yellow Warbler", "Zebra Finch"
             )
         ),
-        Category(
+        Category( // done
             name = "Colors",
             key = "colors",
             emoji = "🎨",
@@ -148,7 +148,7 @@ object CategoryData {
                 "Yarn", "Zipper"
             )
         ),
-        Category(
+        Category( // done
             name = "Numbers",
             key = "numbers",
             emoji = "❶❷\n❸❹",

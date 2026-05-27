@@ -21,6 +21,7 @@ import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -249,6 +250,7 @@ fun ColorScreen(
                         tts?.speak(currentWord, TextToSpeech.QUEUE_FLUSH, null, null)
                     }
                 },
+                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFF1F5F9)
@@ -292,6 +294,7 @@ fun ColorScreen(
                         )
                     }
                 },
+                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFF1F5F9)
