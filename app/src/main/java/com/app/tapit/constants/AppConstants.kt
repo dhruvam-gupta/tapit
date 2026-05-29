@@ -44,10 +44,11 @@ object AppConstants {
         val SPEAK_BUTTON_BOTTOM_EXTRA_PADDING = 16.dp
         val SPEAK_BUTTON_CORNER_RADIUS = 28.dp
         val SPEAK_BUTTON_ELEVATION = 3.dp
-        val SPEAK_BUTTON_CONTENT_HORIZONTAL_PADDING = 16.dp
-        val SPEAK_BUTTON_CONTENT_VERTICAL_PADDING = 8.dp
+        val SPEAK_BUTTON_CONTENT_HORIZONTAL_PADDING = 12.dp
+        val SPEAK_BUTTON_CONTENT_VERTICAL_PADDING = 6.dp
         val SPEAK_BUTTON_ALPHA = 0.45f
-        val SPEAK_BUTTON_WIDTH = 160.dp
+        val BUTTON_ROW_MAX_WIDTH = 360.dp
+        val BUTTON_ROW_MAX_WIDTH_RATIO = 0.8f
     }
 
     // ── Color Screen Layout ─────────────────────────────────
@@ -75,9 +76,9 @@ object AppConstants {
     object Spelling {
         val BADGE_SIZE = 44.dp
         val BADGE_CORNER_RADIUS = 12.dp
-        val LETTER_SPACING = 6.dp
-        val LETTER_FONT_SIZE = 20.sp
-        val ROW_HORIZONTAL_PADDING = 24.dp
+        val LETTER_SPACING = 5.dp
+        val LETTER_FONT_SIZE = 18.sp
+        val ROW_HORIZONTAL_PADDING = 15.dp
         val ROW_TOP_PADDING = 16.dp
         val ACTIVE_SCALE = 1.3f
         val SPELL_BUTTON_HORIZONTAL_PADDING = 12.dp

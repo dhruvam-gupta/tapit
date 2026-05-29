@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
@@ -47,6 +49,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import com.app.tapit.constants.AppConstants
 import com.app.tapit.data.Category
 import kotlinx.coroutines.Dispatchers
@@ -240,7 +243,9 @@ fun ColorScreen(
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = navBarPadding + dims.SPEAK_BUTTON_BOTTOM_EXTRA_PADDING),
+                .widthIn(max = dims.BUTTON_ROW_MAX_WIDTH)
+                .padding(bottom = navBarPadding + dims.SPEAK_BUTTON_BOTTOM_EXTRA_PADDING)
+                .fillMaxWidth(dims.BUTTON_ROW_MAX_WIDTH_RATIO),
             horizontalArrangement = Arrangement.spacedBy(AppConstants.Spelling.BUTTON_GAP)
         ) {
             // "Speak Again" button
@@ -250,7 +255,8 @@ fun ColorScreen(
                         tts?.speak(currentWord, TextToSpeech.QUEUE_FLUSH, null, null)
                     }
                 },
-                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(0.dp),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFF1F5F9)
@@ -294,7 +300,8 @@ fun ColorScreen(
                         )
                     }
                 },
-                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(0.dp),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color(0xFFF1F5F9)

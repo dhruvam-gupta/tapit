@@ -13,9 +13,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.offset
@@ -224,11 +226,7 @@ fun WordScreen(
         Column(
             modifier = Modifier
                 .align(Alignment.TopCenter)
-                .padding(
-                    top = statusBarPadding + dims.WORD_TEXT_TOP_EXTRA_PADDING,
-                    start = dims.WORD_TEXT_HORIZONTAL_PADDING,
-                    end = dims.WORD_TEXT_HORIZONTAL_PADDING
-                )
+                .padding(top = statusBarPadding + dims.WORD_TEXT_TOP_EXTRA_PADDING)
                 .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -238,7 +236,12 @@ fun WordScreen(
                 fontWeight = FontWeight.Bold,
                 color = Color.White,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = dims.WORD_TEXT_HORIZONTAL_PADDING,
+                        end = dims.WORD_TEXT_HORIZONTAL_PADDING
+                    ),
                 style = androidx.compose.ui.text.TextStyle(
                     shadow = androidx.compose.ui.graphics.Shadow(
                         color = Color.Black,
@@ -268,7 +271,11 @@ fun WordScreen(
         Row(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = navBarPadding + dims.SPEAK_BUTTON_BOTTOM_EXTRA_PADDING),
+                .padding(bottom = navBarPadding + dims.SPEAK_BUTTON_BOTTOM_EXTRA_PADDING)
+                // Limits width on tablets so buttons don't stretch indefinitely
+                .widthIn(max = dims.BUTTON_ROW_MAX_WIDTH)
+                // Takes up 80% of the screen width on phones
+                .fillMaxWidth(dims.BUTTON_ROW_MAX_WIDTH_RATIO),
             horizontalArrangement = Arrangement.spacedBy(AppConstants.Spelling.BUTTON_GAP)
         ) {
             // "Speak Again" button
@@ -278,7 +285,10 @@ fun WordScreen(
                         tts?.speak(getSpokenText(currentWord), TextToSpeech.QUEUE_FLUSH, null, null)
                     }
                 },
-                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
+                // weight(1f) ensures both buttons split the remaining space 50/50, 
+                // making them EXACTLY equal in size on any screen size.
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(0.dp),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
@@ -322,7 +332,8 @@ fun WordScreen(
                         )
                     }
                 },
-                modifier = Modifier.width(dims.SPEAK_BUTTON_WIDTH),
+                modifier = Modifier.weight(1f),
+                contentPadding = PaddingValues(0.dp),
                 shape = RoundedCornerShape(dims.SPEAK_BUTTON_CORNER_RADIUS),
                 colors = ButtonDefaults.buttonColors(
                     containerColor = Color.White.copy(alpha = dims.SPEAK_BUTTON_ALPHA)
