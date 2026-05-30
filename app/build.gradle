@@ -20,6 +20,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            applicationIdSuffix ".dev"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
@@ -27,6 +30,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '17'
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.5.3'
     }
 }
 
@@ -37,4 +46,14 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'io.coil-kt:coil:2.6.0'
     implementation 'androidx.activity:activity-ktx:1.9.0'
+
+    // Jetpack Compose
+    implementation platform('androidx.compose:compose-bom:2024.02.00')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.material3:material3'
+    implementation 'androidx.compose.ui:ui-tooling-preview'
+    implementation 'androidx.activity:activity-compose:1.9.0'
+    implementation 'androidx.navigation:navigation-compose:2.7.7'
+    implementation 'io.coil-kt:coil-compose:2.6.0'
+    debugImplementation 'androidx.compose.ui:ui-tooling'
 }

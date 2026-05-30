@@ -61,12 +61,16 @@ COPY . .
 # Ensure gradlew is executable
 RUN chmod +x gradlew
 
-# Build debug APK + release AAB
-RUN ./gradlew clean assembleDebug bundleRelease --no-daemon --stacktrace
+# Default build argument (can be overridden with --build-arg)
+ARG BUILD_TASK="assembleDebug"
 
-# Rename APK to a friendly name
-RUN mv app/build/outputs/apk/debug/app-debug.apk \
-       app/build/outputs/apk/debug/Tap_and_Learn.apk
+# Build the specified variant
+RUN ./gradlew clean ${BUILD_TASK} --no-daemon --stacktrace
+
+# Rename the output if it's the debug APK (ignore if release)
+RUN if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then \
+        mv app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/Tap_and_Learn.apk; \
+    fi
 
 # ─────────────────────────────────────────────
 #  Outputs (extract with docker cp):

@@ -4,6 +4,10 @@ build/
 
 # Local configuration file (sdk path, etc)
 local.properties
+.vscode/
+*.py
+.dockerignore
+.DS_STORE
 
 # Log/OS Files
 *.log
