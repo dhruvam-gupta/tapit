@@ -60,32 +60,18 @@ import java.util.Locale
  * Maps each color word in the Colors category to its actual [Color] value.
  */
 private val colorNameToColor = mapOf(
-    "Amber" to Color(0xFFFFBF00),
     "Blue" to Color(0xFF2196F3),
-    "Cyan" to Color(0xFF00BCD4),
-    "Dark Green" to Color(0xFF1B5E20),
-    "Emerald" to Color(0xFF50C878),
-    "Fuchsia" to Color(0xFFFF00FF),
-    "Gold" to Color(0xFFFFD700),
-    "Hot Pink" to Color(0xFFFF69B4),
-    "Indigo" to Color(0xFF3F51B5),
-    "Jade" to Color(0xFF00A86B),
     "Khaki" to Color(0xFFC3B091),
-    "Lavender" to Color(0xFFE6E6FA),
-    "Magenta" to Color(0xFFE91E63),
-    "Navy" to Color(0xFF000080),
     "Orange" to Color(0xFFFF9800),
     "Pink" to Color(0xFFE91E90),
-    "Quartz" to Color(0xFF51484F),
     "Red" to Color(0xFFF44336),
-    "Silver" to Color(0xFFC0C0C0),
-    "Teal" to Color(0xFF009688),
-    "Umber" to Color(0xFF635147),
-    "Violet" to Color(0xFF9C27B0),
+    "Gray" to Color(0xFFC0C0C0),
+    "Purple" to Color(0xFF800080),
     "White" to Color(0xFFFFFFFF),
-    "Xanadu" to Color(0xFF738678),
     "Yellow" to Color(0xFFFFEB3B),
-    "Zinc White" to Color(0xFFF5F5F5)
+    "Green" to Color(0xFF45BF55),
+    "Black" to Color(0xFF000000),
+    "Brown" to Color(0xFF964B00)
 )
 
 @Composable

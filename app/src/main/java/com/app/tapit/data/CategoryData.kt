@@ -75,12 +75,10 @@ object CategoryData {
             key = "colors",
             emoji = "🎨",
             words = listOf(
-                "Amber", "Blue", "Cyan", "Dark Green", "Emerald",
-                "Fuchsia", "Gold", "Hot Pink", "Indigo", "Jade",
-                "Khaki", "Lavender", "Magenta", "Navy", "Orange",
-                "Pink", "Quartz", "Red", "Silver", "Teal",
-                "Umber", "Violet", "White", "Xanadu",
-                "Yellow", "Zinc White"
+                "Blue", "Green", "Pink",
+                "Khaki", "Orange", "Purple",
+                "Red", "Gray", "White",
+                "Yellow", "Black", "Brown"
             )
         ),
         Category(
