@@ -2,6 +2,7 @@ package com.app.tapit.constants
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.app.tapit.data.CategoryData
 
 /**
  * Centralized constants for layout dimensions, text sizes, animations, and other values.
@@ -91,5 +92,17 @@ object AppConstants {
         val CARD_PRESS_SCALE = 0.94f
         val CARD_PRESS_DURATION_MS = 100
         const val RECENT_WORDS_LIMIT = 5
+    }
+
+    // ── Temporary constants ───────────────────────────────────────────
+    object TempConstants {
+        val comingSoonCategoryKeys = setOf(
+                "vegetables",
+                "shapes",
+                "vehicles",
+                "body_parts",
+                "clothing",
+                "everyday_objects"
+        )
     }
 }

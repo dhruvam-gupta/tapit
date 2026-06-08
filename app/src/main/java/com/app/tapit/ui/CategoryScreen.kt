@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.app.tapit.constants.AppConstants
+import com.app.tapit.constants.AppConstants.TempConstants.comingSoonCategoryKeys
 import com.app.tapit.data.Category
 import com.app.tapit.data.CategoryData
 
@@ -99,10 +100,12 @@ fun CategoryScreen(
         ) {
             items(CategoryData.categories) { category ->
                 val colorIndex = CategoryData.categories.indexOf(category) % cardColors.size
+                val isComingSoon = category.key in comingSoonCategoryKeys
                 CategoryCard(
                     category = category,
                     cardColor = cardColors[colorIndex],
-                    onClick = { onCategoryClick(category) }
+                    isComingSoon = isComingSoon,
+                    onClick = { if (!isComingSoon) onCategoryClick(category) }
                 )
             }
         }
@@ -113,6 +116,7 @@ fun CategoryScreen(
 private fun CategoryCard(
     category: Category,
     cardColor: Color,
+    isComingSoon: Boolean = false,
     onClick: () -> Unit
 ) {
     val grid = AppConstants.CategoryGrid
@@ -141,7 +145,8 @@ private fun CategoryCard(
             .clickable(
                 interactionSource = interactionSource,
                 indication = null,
-                onClick = onClick
+                onClick = onClick,
+                enabled = !isComingSoon
             ),
         shape = RoundedCornerShape(grid.CARD_CORNER_RADIUS),
         colors = CardDefaults.cardColors(containerColor = cardColor),
@@ -189,6 +194,18 @@ private fun CategoryCard(
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = grid.ITEM_COUNT_TOP_PADDING)
             )
+
+            // Coming Soon badge
+            if (isComingSoon) {
+                Text(
+                        text = "COMING SOON",
+                        fontSize = textSize.ITEM_COUNT,
+                        fontWeight = FontWeight.Bold,
+                        color = Color(0xFFFF6B35),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.padding(top = grid.ITEM_COUNT_TOP_PADDING)
+                )
+            }
         }
     }
 }
