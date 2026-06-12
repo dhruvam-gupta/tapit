@@ -18,7 +18,7 @@ object CategoryData {
     val sequentialCategories = setOf("numbers", "colors")
 
     val categories = listOf(
-        Category( // done
+        Category(
             name = "Fruits",
             key = "fruits",
             emoji = "🍎",
@@ -32,19 +32,17 @@ object CategoryData {
             )
         ),
         Category(
-            name = "Vegetables",
-            key = "vegetables",
-            emoji = "🥦",
-            words = listOf(
-                "Artichoke", "Asparagus", "Beetroot", "Bell Pepper", "Broccoli",
-                "Cabbage", "Carrot", "Cauliflower", "Celery", "Corn",
-                "Cucumber", "Eggplant", "Garlic", "Ginger", "Green Bean",
-                "Kale", "Lettuce", "Mushroom", "Onion", "Pea",
-                "Potato", "Pumpkin", "Radish", "Spinach", "Sweet Potato",
-                "Tomato"
-            )
+                name = "Numbers",
+                key = "numbers",
+                emoji = "❶❷\n❸❹",
+                words = listOf(
+                        "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
+                        "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
+                        "Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four", "Twenty-five", "Twenty-six", "Twenty-seven", "Twenty-eight",
+                        "Twenty-nine", "Thirty"
+                )
         ),
-        Category( //done
+        Category(
             name = "Animals",
             key = "animals",
             emoji = "🐾",
@@ -70,7 +68,7 @@ object CategoryData {
                 "Yellow Warbler", "Zebra Finch"
             )
         ),
-        Category( // done
+        Category(
             name = "Colors",
             key = "colors",
             emoji = "🎨",
@@ -146,16 +144,18 @@ object CategoryData {
                 "Yarn", "Zipper"
             )
         ),
-        Category( // done
-            name = "Numbers",
-            key = "numbers",
-            emoji = "❶❷\n❸❹",
-            words = listOf(
-                "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten",
-                "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen", "Twenty",
-                "Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four", "Twenty-five", "Twenty-six", "Twenty-seven", "Twenty-eight", 
-                "Twenty-nine", "Thirty"
-            )
+        Category(
+                name = "Vegetables",
+                key = "vegetables",
+                emoji = "🥦",
+                words = listOf(
+                        "Artichoke", "Asparagus", "Beetroot", "Bell Pepper", "Broccoli",
+                        "Cabbage", "Carrot", "Cauliflower", "Celery", "Corn",
+                        "Cucumber", "Eggplant", "Garlic", "Ginger", "Green Bean",
+                        "Kale", "Lettuce", "Mushroom", "Onion", "Pea",
+                        "Potato", "Pumpkin", "Radish", "Spinach", "Sweet Potato",
+                        "Tomato"
+                )
         )
     )
 
