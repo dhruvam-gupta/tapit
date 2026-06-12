@@ -1,5 +1,6 @@
 package com.app.tapit.ui
 
+import android.widget.Toast
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.clickable
@@ -34,16 +35,16 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
 import com.app.tapit.constants.AppConstants
 import com.app.tapit.constants.AppConstants.TempConstants.comingSoonCategoryKeys
 import com.app.tapit.data.Category
 import com.app.tapit.data.CategoryData
+
 
 // Curated pastel palette for category cards
 private val cardColors = listOf(
@@ -65,6 +66,7 @@ private val cardColors = listOf(
 fun CategoryScreen(
     onCategoryClick: (Category) -> Unit
 ) {
+    val context = LocalContext.current
     val grid = AppConstants.CategoryGrid
     val textSize = AppConstants.TextSize
 
@@ -105,7 +107,14 @@ fun CategoryScreen(
                     category = category,
                     cardColor = cardColors[colorIndex],
                     isComingSoon = isComingSoon,
-                    onClick = { if (!isComingSoon) onCategoryClick(category) }
+                    onClick = { if (!isComingSoon) onCategoryClick(category) },
+                    onComingSoonClick = {
+                        Toast.makeText(
+                                context,
+                                "${category.name} will be available soon",
+                                Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 )
             }
         }
@@ -117,7 +126,8 @@ private fun CategoryCard(
     category: Category,
     cardColor: Color,
     isComingSoon: Boolean = false,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    onComingSoonClick: () -> Unit = {}
 ) {
     val grid = AppConstants.CategoryGrid
     val textSize = AppConstants.TextSize
@@ -147,6 +157,12 @@ private fun CategoryCard(
                 indication = null,
                 onClick = onClick,
                 enabled = !isComingSoon
+            ).then(
+                if (isComingSoon) Modifier.clickable(
+                        interactionSource = interactionSource,
+                        indication = null,
+                        onClick = onComingSoonClick
+                ) else Modifier
             ),
         shape = RoundedCornerShape(grid.CARD_CORNER_RADIUS),
         colors = CardDefaults.cardColors(containerColor = cardColor),

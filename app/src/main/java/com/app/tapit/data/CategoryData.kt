@@ -19,17 +19,54 @@ object CategoryData {
 
     val categories = listOf(
         Category(
-            name = "Fruits",
-            key = "fruits",
-            emoji = "🍎",
-            words = listOf(
-                "Apple", "Banana", "Cherry", "Dragonfruit", "Elderberry",
-                "Fig", "Grape", "Honeydew", "Indian Gooseberry", "Jackfruit",
-                "Kiwi", "Lemon", "Mango", "Nectarine", "Orange",
-                "Papaya", "Pomegranate", "Quince", "Raspberry", "Strawberry", "Tangerine",
-                "Ugli Fruit", "Vanilla Bean", "Watermelon", "Ximenia or Wild Plum",
-                "Yellow Passion Fruit", "Zucchini"
-            )
+                name = "Animals",
+                key = "animals",
+                emoji = "🐾",
+                words = listOf(
+                        "Alligator", "Bear", "Cat", "Dog", "Elephant",
+                        "Fox", "Frog", "Giraffe", "Horse", "Iguana", "Jaguar",
+                        "Kangaroo", "Lion", "Monkey", "Newt", "Octopus",
+                        "Panda", "Quoll", "Rabbit", "Snake", "Tiger",
+                        "Unicorn", "Vampire Bat", "Wolf", "X-Ray Fish",
+                        "Yak", "Zebra"
+                )
+        ),
+        Category(
+                name = "Birds",
+                key = "birds",
+                emoji = "🐦",
+                words = listOf(
+                        "Albatross", "Bluebird", "Crow", "Dove", "Eagle",
+                        "Flamingo", "Goldfinch", "Hummingbird", "Ibis", "Jay",
+                        "Kingfisher", "Lark", "Magpie", "Nightingale", "Owl",
+                        "Parrot", "Quail", "Quetzal", "Robin", "Sparrow", "Toucan",
+                        "Umbrellabird", "Vulture", "Woodpecker", "Xenops",
+                        "Yellow Warbler", "Zebra Finch"
+                )
+        ),
+        Category(
+                name = "Colors",
+                key = "colors",
+                emoji = "🎨",
+                words = listOf(
+                        "Blue", "Green", "Pink",
+                        "Khaki", "Orange", "Purple",
+                        "Red", "Gray", "White",
+                        "Yellow", "Black", "Brown"
+                )
+        ),
+        Category(
+                name = "Fruits",
+                key = "fruits",
+                emoji = "🍎",
+                words = listOf(
+                    "Apple", "Banana", "Cherry", "Dragonfruit", "Elderberry",
+                    "Fig", "Grape", "Honeydew", "Indian Gooseberry", "Jackfruit",
+                    "Kiwi", "Lemon", "Mango", "Nectarine", "Orange",
+                    "Papaya", "Pomegranate", "Quince", "Raspberry", "Strawberry", "Tangerine",
+                    "Ugli Fruit", "Vanilla Bean", "Watermelon", "Ximenia or Wild Plum",
+                    "Yellow Passion Fruit", "Zucchini"
+                )
         ),
         Category(
                 name = "Numbers",
@@ -41,43 +78,6 @@ object CategoryData {
                         "Twenty-one", "Twenty-two", "Twenty-three", "Twenty-four", "Twenty-five", "Twenty-six", "Twenty-seven", "Twenty-eight",
                         "Twenty-nine", "Thirty"
                 )
-        ),
-        Category(
-            name = "Animals",
-            key = "animals",
-            emoji = "🐾",
-            words = listOf(
-                "Alligator", "Bear", "Cat", "Dog", "Elephant",
-                "Fox", "Frog", "Giraffe", "Horse", "Iguana", "Jaguar",
-                "Kangaroo", "Lion", "Monkey", "Newt", "Octopus",
-                "Panda", "Quoll", "Rabbit", "Snake", "Tiger",
-                "Unicorn", "Vampire Bat", "Wolf", "X-Ray Fish",
-                "Yak", "Zebra"
-            )
-        ),
-        Category(
-            name = "Birds",
-            key = "birds",
-            emoji = "🐦",
-            words = listOf(
-                "Albatross", "Bluebird", "Crow", "Dove", "Eagle",
-                "Flamingo", "Goldfinch", "Hummingbird", "Ibis", "Jay",
-                "Kingfisher", "Lark", "Magpie", "Nightingale", "Owl",
-                "Parrot", "Quail", "Quetzal", "Robin", "Sparrow", "Toucan",
-                "Umbrellabird", "Vulture", "Woodpecker", "Xenops",
-                "Yellow Warbler", "Zebra Finch"
-            )
-        ),
-        Category(
-            name = "Colors",
-            key = "colors",
-            emoji = "🎨",
-            words = listOf(
-                "Blue", "Green", "Pink",
-                "Khaki", "Orange", "Purple",
-                "Red", "Gray", "White",
-                "Yellow", "Black", "Brown"
-            )
         ),
         Category(
             name = "Shapes",
