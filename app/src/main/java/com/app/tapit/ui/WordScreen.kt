@@ -296,7 +296,7 @@ fun WordScreen(
                 elevation = ButtonDefaults.buttonElevation(defaultElevation = dims.SPEAK_BUTTON_ELEVATION)
             ) {
                 Text(
-                    text = "Speak Again",
+                    text = "Say It",
                     fontSize = textSize.SPEAK_BUTTON,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF1A1A1A),
