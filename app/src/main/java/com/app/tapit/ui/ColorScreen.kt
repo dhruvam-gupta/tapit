@@ -234,7 +234,7 @@ fun ColorScreen(
                 .fillMaxWidth(dims.BUTTON_ROW_MAX_WIDTH_RATIO),
             horizontalArrangement = Arrangement.spacedBy(AppConstants.Spelling.BUTTON_GAP)
         ) {
-            // "Speak Again" button
+            // "Say It" button
             Button(
                 onClick = {
                     if (currentWord.isNotEmpty()) {
@@ -250,7 +250,7 @@ fun ColorScreen(
                 elevation = ButtonDefaults.buttonElevation(defaultElevation = dims.SPEAK_BUTTON_ELEVATION)
             ) {
                 Text(
-                    text = "Speak Again",
+                    text = "Say It",
                     fontSize = textSize.SPEAK_BUTTON,
                     fontWeight = FontWeight.Bold,
                     color = Color(0xFF1A1A1A),

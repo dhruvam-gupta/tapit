@@ -278,7 +278,7 @@ fun WordScreen(
                 .fillMaxWidth(dims.BUTTON_ROW_MAX_WIDTH_RATIO),
             horizontalArrangement = Arrangement.spacedBy(AppConstants.Spelling.BUTTON_GAP)
         ) {
-            // "Speak Again" button
+            // "Say It" button
             Button(
                 onClick = {
                     if (currentWord.isNotEmpty()) {
