@@ -84,12 +84,8 @@ object CategoryData {
             key = "shapes",
             emoji = "🔷",
             words = listOf(
-                "Arrow", "Bowtie", "Circle", "Diamond", "Ellipse",
-                "Fan", "Grid", "Heart", "Infinity", "Jigsaw",
-                "Kite", "Lightning", "Moon", "Nonagon", "Oval",
-                "Pentagon", "Quadrilateral", "Rectangle", "Star", "Triangle",
-                "U Shape", "V Shape", "Wave", "X Shape",
-                "Y Shape", "Zigzag"
+                "Arrow", "Circle", "Diamond", "Hexagon", "Heart", "Oval",
+                "Pentagon", "Rectangle", "Square", "Star", "Triangle"
             )
         ),
         Category(
