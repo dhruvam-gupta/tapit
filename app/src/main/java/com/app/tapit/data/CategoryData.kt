@@ -106,7 +106,7 @@ object CategoryData {
             key = "body_parts",
             emoji = "🦵",
             words = listOf(
-                "Head", "Hair", "Face", "Eye", "Ear",
+                "Hair", "Face", "Eye", "Ear",
                 "Nose", "Mouth", "Teeth", "Tongue", "Neck",
                 "Shoulder", "Arm", "Elbow", "Hand", "Palm",
                 "Fingers", "Nails", "Chest", "Stomach", "Back",
