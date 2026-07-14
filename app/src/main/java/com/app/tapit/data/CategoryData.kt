@@ -108,9 +108,9 @@ object CategoryData {
             words = listOf(
                 "Hair", "Face", "Eye", "Ear",
                 "Nose", "Mouth", "Teeth", "Tongue", "Neck",
-                "Shoulder", "Arm", "Elbow", "Hand", "Palm",
-                "Fingers", "Nails", "Chest", "Stomach", "Back",
-                "Leg", "Thigh", "Knee", "Foot", "Heel",
+                "Shoulder", "Elbow", "Hand",
+                "Chest", "Stomach", "Back",
+                "Leg", "Knee", "Foot", "Heel",
                 "Toes"
             )
         ),
