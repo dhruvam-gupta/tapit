@@ -11,7 +11,7 @@ android {
         applicationId "com.app.tapit"
         minSdk 24
         targetSdk 35
-        versionCode 9 // version to introduce the body_parts category
+        versionCode 10 // version to introduce the body_parts category + gradle version upgrade
         versionName "1.0"
     }
 
@@ -37,6 +37,11 @@ android {
     }
     composeOptions {
         kotlinCompilerExtensionVersion '1.5.3'
+    }
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
     }
 }
 
