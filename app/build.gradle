@@ -11,7 +11,7 @@ android {
         applicationId "com.app.tapit"
         minSdk 24
         targetSdk 35
-        versionCode 8 // version to introduce the shapes 
+        versionCode 9 // version to introduce the body_parts category
         versionName "1.0"
     }
 
