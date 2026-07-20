@@ -98,7 +98,6 @@ object AppConstants {
     object TempConstants {
         val comingSoonCategoryKeys = setOf(
                 "vegetables",
-                "vehicles",
                 "clothing",
                 "everyday_objects"
         )

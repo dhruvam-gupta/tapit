@@ -93,12 +93,10 @@ object CategoryData {
             key = "vehicles",
             emoji = "🚗",
             words = listOf(
-                "Ambulance", "Bus", "Car", "Dump Truck", "Engine",
-                "Fire Truck", "Golf Cart", "Helicopter", "Ice Cream Truck", "Jeep",
-                "Kayak", "Limousine", "Motorcycle", "Narrowboat", "Off-Roader",
-                "Plane", "Quad Bike", "Rickshaw", "Scooter", "Train",
-                "Unicycle", "Van", "Wagon", "X-Wing",
-                "Yacht", "Zeppelin"
+                "Ambulance", "Bus", "Car", "Dump Truck",
+                "Fire Truck", "Golf Cart", "Helicopter", "Aeroplane", "Jeep",
+                "Motorcycle", "Boat", "Auto Rickshaw", "Scooter", "Train",
+                "Van", "Ship"
             )
         ),
         Category(
