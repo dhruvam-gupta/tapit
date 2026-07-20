@@ -8,7 +8,8 @@
 #    docker run --platform linux/amd64 --rm -v "$(pwd)":/project -w /project tapit-sdk \
 #        ./gradlew clean assembleDebug --no-daemon
 # ═══════════════════════════════════════════════════════════════
-FROM eclipse-temurin:17-jdk-jammy AS sdk
+ARG TARGETPLATFORM=linux/amd64
+FROM --platform=$TARGETPLATFORM eclipse-temurin:17-jdk-jammy AS sdk
 
 # ---------- Android SDK env ----------
 ENV ANDROID_HOME=/opt/android-sdk
