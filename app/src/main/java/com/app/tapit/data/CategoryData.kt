@@ -129,11 +129,10 @@ object CategoryData {
             emoji = "🏠",
             words = listOf(
                 "Alarm Clock", "Book", "Chair", "Door", "Envelope",
-                "Fork", "Globe", "Hammer", "Iron", "Ice Cream", "Jar", "Juice",
+                "Fork", "Globe", "Hammer", "Iron", "Jar", "Spoon",
                 "Key", "Lamp", "Mirror", "Notebook", "Oven",
-                "Pillow", "Quill", "Ruler", "Scissors", "Table",
-                "Umbrella", "Vase", "Watch", "Xylophone",
-                "Yarn", "Zipper"
+                "Pillow", "Ruler", "Scissor", "Table",
+                "Umbrella", "Vase", "Watch"
             )
         ),
         Category(
@@ -141,12 +140,12 @@ object CategoryData {
                 key = "vegetables",
                 emoji = "🥦",
                 words = listOf(
-                        "Artichoke", "Asparagus", "Beetroot", "Bell Pepper", "Broccoli",
-                        "Cabbage", "Carrot", "Cauliflower", "Celery", "Corn",
-                        "Cucumber", "Eggplant", "Garlic", "Ginger", "Green Bean",
-                        "Kale", "Lettuce", "Mushroom", "Onion", "Pea",
+                        "Beetroot", "Bell Pepper", "Broccoli",
+                        "Cabbage", "Carrot", "Cauliflower", "Corn",
+                        "Cucumber", "Eggplant", "Garlic", "Ginger",
+                        "Mushroom", "Onion", "Pea",
                         "Potato", "Pumpkin", "Radish", "Spinach", "Sweet Potato",
-                        "Tomato"
+                        "Tomato", "Bitter Gourd"
                 )
         )
     )

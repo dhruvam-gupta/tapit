@@ -4,7 +4,7 @@
 #  No project code is copied in.
 #
 #  Use this stage to build with a volume-mounted project:
-#    docker build --platform linux/amd64 --target sdk -t tapit-sdk .
+#    docker build x --target sdk -t tapit-sdk .
 #    docker run --platform linux/amd64 --rm -v "$(pwd)":/project -w /project tapit-sdk \
 #        ./gradlew clean assembleDebug --no-daemon
 # ═══════════════════════════════════════════════════════════════
