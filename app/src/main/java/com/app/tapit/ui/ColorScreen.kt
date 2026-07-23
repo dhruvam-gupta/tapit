@@ -26,7 +26,7 @@ import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -34,6 +34,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -138,6 +139,9 @@ fun ColorScreen(
         tts?.speak(word, TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
+    // Handle system back gesture / button (API 33+ predictive back, all versions via BackHandler)
+    BackHandler(onBack = onBackClick)
+
     // Animate the card fill color for a smooth transition
     val animatedCardColor by animateColorAsState(
         targetValue = if (hasStarted) currentColor else Color.White,
@@ -217,7 +221,7 @@ fun ColorScreen(
             )
         ) {
             Icon(
-                imageVector = Icons.Default.ArrowBack,
+                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                 contentDescription = "Back",
                 tint = Color(0xFF1E293B),
                 modifier = Modifier.size(dims.BACK_ICON_SIZE)

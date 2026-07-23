@@ -5,11 +5,20 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:navigationBarColor">@android:color/transparent</item>
 
-        <!-- Force system bar icons to be visible in light mode -->
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar">true</item>
+        <!--
+            API 35+: windowLightStatusBar / windowLightNavigationBar are deprecated.
+            The system now auto-adapts icon colours via contrast enforcement.
+            enforceStatusBarContrast / enforceNavigationBarContrast = false lets
+            enableEdgeToEdge() in MainActivity take full control of icon tinting
+            at runtime (which it already does), avoiding any conflict with the theme.
+        -->
+        <item name="android:enforceStatusBarContrast">false</item>
+        <item name="android:enforceNavigationBarContrast">false</item>
 
-        <!-- Configure window content to lay out under the display cutout / notch -->
-        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <!--
+            'always' is required for API 36: content renders under the cutout
+            in every orientation, not just short edges.
+        -->
+        <item name="android:windowLayoutInDisplayCutoutMode">always</item>
     </style>
 </resources>

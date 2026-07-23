@@ -28,7 +28,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -36,6 +36,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -158,6 +159,9 @@ fun WordScreen(
         tts?.speak(getSpokenText(word), TextToSpeech.QUEUE_FLUSH, null, null)
     }
 
+    // Handle system back gesture / button (API 33+ predictive back, all versions via BackHandler)
+    BackHandler(onBack = onBackClick)
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -201,7 +205,7 @@ fun WordScreen(
             Box {
                 // Shadow layer — dark icon offset behind the main icon
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = null,
                     tint = Color.Black.copy(alpha = dims.BACK_SHADOW_ALPHA),
                     modifier = Modifier
@@ -213,7 +217,7 @@ fun WordScreen(
                 )
                 // Main white icon
                 Icon(
-                    imageVector = Icons.Default.ArrowBack,
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                     contentDescription = "Back",
                     tint = Color.White,
                     modifier = Modifier.size(dims.BACK_ICON_SIZE)
