@@ -11,7 +11,7 @@ android {
         applicationId "com.app.tapit"
         minSdk 24
         targetSdk 36
-        versionCode 10 // version to introduce the body_parts category + gradle version upgrade
+        versionCode 11 // version to introduce the vegetable and everyday object categories with targetsdk 36
         versionName "1.0"
     }
 
