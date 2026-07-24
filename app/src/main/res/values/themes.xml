@@ -16,9 +16,9 @@
         <item name="android:enforceNavigationBarContrast">false</item>
 
         <!--
-            'always' is required for API 36: content renders under the cutout
-            in every orientation, not just short edges.
+            'shortEdges' is used for API 28-29. 'always' (value 3) was introduced in API 30,
+            so API 30+ cutout settings are placed in values-v30/themes.xml.
         -->
-        <item name="android:windowLayoutInDisplayCutoutMode">always</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
     </style>
 </resources>
