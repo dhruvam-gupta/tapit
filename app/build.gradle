@@ -11,7 +11,7 @@ android {
         applicationId "com.app.tapit"
         minSdk 24
         targetSdk 36
-        versionCode 11 // version to introduce the vegetable and everyday object categories with targetsdk 36
+        versionCode 12 // version to introduce clothing category
         versionName "1.0"
     }
 

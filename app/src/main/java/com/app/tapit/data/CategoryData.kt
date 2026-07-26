@@ -116,7 +116,7 @@ object CategoryData {
             emoji = "👕",
             words = listOf(
                 "Apron", "Belt", "Cap", "School Dress",
-                "Gloves", "Hat", "Pants", "Raincoat", "T-Shirt",
+                "Gloves", "Hat", "Pant", "Raincoat", "T-Shirt",
                 "Shirt", "Slippers", "Shoes", "Socks", "Frock"
             )
         ),
