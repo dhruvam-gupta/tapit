@@ -115,12 +115,9 @@ object CategoryData {
             key = "clothing",
             emoji = "👕",
             words = listOf(
-                "Apron", "Belt", "Cap", "Dress", "Earring",
-                "Flannel", "Gloves", "Hat", "Inners", "Jacket",
-                "Kimono", "Legging", "Mittens", "Necklace", "Overalls",
-                "Pants", "Quilt Jacket", "Raincoat", "Scarf", "T-Shirt",
-                "Uniform", "Vest", "Windbreaker", "X-Strap Sandal",
-                "Yarn Sweater", "Zip Hoodie"
+                "Apron", "Belt", "Cap", "School Dress",
+                "Gloves", "Hat", "Pants", "Raincoat", "T-Shirt",
+                "Shirt", "Slippers", "Shoes", "Socks", "Frock"
             )
         ),
         Category(
