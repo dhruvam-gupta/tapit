@@ -11,7 +11,7 @@ android {
         applicationId "com.app.tapit"
         minSdk 24
         targetSdk 36
-        versionCode 12 // version to introduce clothing category
+        versionCode 13 // optimized animal and bird images
         versionName "1.0"
     }
 
